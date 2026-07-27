@@ -35,5 +35,5 @@ My portfolio showcases my background, certifications, technical skills, projects
 ## Contact
 
 - Email: muhammadumar12414@gmail.com
-- GitHub: https://github.com/UMAR-CY
+- GitHub: https://github.com/UMAR-CYSEC
 - LinkedIn: www.linkedin.com/in/muhammad-umar-cy
