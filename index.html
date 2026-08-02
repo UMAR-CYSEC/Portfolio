@@ -397,7 +397,9 @@
     <div class="contact-grid">
       <div class="contact-form-wrapper animate-item" data-animation="slide-bl">
         <h3>Send Me a Message</h3>
-        <form id="contactForm" class="contact-form">
+        <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact">
+        </form>
           <div class="form-group">
             <input type="text" id="fullName" name="fullName" required autocomplete="name">
             <label for="fullName">Full Name</label>
