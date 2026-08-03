@@ -260,9 +260,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const subject = subjectEl ? subjectEl.value : '';
             const message = messageEl ? messageEl.value : '';
             
-            const mailtoLink = `mailto:muhammadumar12414@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${fullName}\nEmail: ${email}\n\n${message}`)}`;
+            const formData = new FormData(contactForm);
             
-            window.location.href = mailtoLink;
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            })
+            .catch((error) => console.error('Form error:', error));
             
             if (sendBtn) {
                 const originalText = sendBtn.innerHTML;
