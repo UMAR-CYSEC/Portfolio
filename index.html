@@ -87,9 +87,7 @@
       <div class="about-photo-wrapper animate-item" data-animation="slide-left">
         <div class="photo-frame">
           <div class="frame-border"></div>
-          <div class="profile-photo-placeholder">
-            <img src="profile.png" alt="Muhammad Umar" class="profile-photo">
-          </div>
+          <img src="profile.png" alt="Muhammad Umar" class="profile-photo-placeholder" style="object-fit: cover; display: block;">
         </div>
         <div class="view-work-buttons">
           <a href="#education" class="view-btn animate-item"><i class="fas fa-graduation-cap"></i> Education</a>
@@ -373,14 +371,14 @@
       </div>
       <div class="cert-card animate-item" data-tilt>
         <div class="cert-badge"><i class="fas fa-network-wired"></i></div>
-        <div class="cert-image-placeholder"><img src="cert-cisco.jpg" alt="Introduction to Cybersecurity Certficate" class="cert-image"></div>
+        <img src="cert-cisco.JPG" alt="Introduction to Cybersecurity Certificate" class="cert-image-placeholder" style="object-fit: cover;">
         <h3>Introduction to Cybersecurity</h3>
         <p class="cert-provider">Cisco Networking Academy</p>
         <span class="cert-status completed"><i class="fas fa-check-circle"></i> Completed</span>
       </div>
       <div class="cert-card animate-item" data-tilt>
         <div class="cert-badge"><i class="fas fa-user-shield"></i></div>
-        <div class="cert-image-placeholder"><img src="cert-hackviser.jpg" alt="Core Cybersecurity Course Certificate" class="cert-image"></div>
+        <img src="cert-hackviser.JPG" alt="Core Cybersecurity Course Certificate" class="cert-image-placeholder" style="object-fit: cover;">
         <h3>Core Cybersecurity Course</h3>
         <p class="cert-provider">HackerViser</p>
         <span class="cert-status completed"><i class="fas fa-check-circle"></i> Completed</span>
@@ -397,9 +395,8 @@
     <div class="contact-grid">
       <div class="contact-form-wrapper animate-item" data-animation="slide-bl">
         <h3>Send Me a Message</h3>
-        <form id="contactForm" class="contact-form" name="contact" method="POST" data-netlify="true">
-          <input type="hidden" name="form-name" value="contact">
-        </form>
+        <form id="contactForm" class="contact-form" name="contactForm" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contactForm">
           <div class="form-group">
             <input type="text" id="fullName" name="fullName" required autocomplete="name">
             <label for="fullName">Full Name</label>

@@ -250,36 +250,30 @@ document.addEventListener('DOMContentLoaded', () => {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            const nameEl = document.getElementById('fullName');
-            const emailEl = document.getElementById('emailAddr');
-            const subjectEl = document.getElementById('subject');
-            const messageEl = document.getElementById('message');
-            
-            const fullName = nameEl ? nameEl.value : '';
-            const email = emailEl ? emailEl.value : '';
-            const subject = subjectEl ? subjectEl.value : '';
-            const message = messageEl ? messageEl.value : '';
-            
             const formData = new FormData(contactForm);
             
             fetch('/', {
                 method: 'POST',
-                headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: new URLSearchParams(formData).toString()
             })
-            .catch((error) => console.error('Form error:', error));
-            
-            if (sendBtn) {
-                const originalText = sendBtn.innerHTML;
-                sendBtn.innerHTML = 'Message Sent! ✓';
-                sendBtn.classList.add('sent');
-                
-                setTimeout(() => {
-                    sendBtn.innerHTML = originalText;
-                    sendBtn.classList.remove('sent');
-                    contactForm.reset();
-                }, 2000);
-            }
+            .then(() => {
+                if (sendBtn) {
+                    const originalText = sendBtn.innerHTML;
+                    sendBtn.innerHTML = 'Message Sent! ✓';
+                    sendBtn.classList.add('sent');
+                    
+                    setTimeout(() => {
+                        sendBtn.innerHTML = originalText;
+                        sendBtn.classList.remove('sent');
+                        contactForm.reset();
+                    }, 3000);
+                }
+            })
+            .catch((error) => {
+                console.error('Form submission error:', error);
+                alert('Error sending message. Please try again.');
+            });
         });
     }
 
