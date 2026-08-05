@@ -1,21 +1,21 @@
 /* COLOR THEME & CUSTOM PROPERTIES */
 :root {
-  --primary: #2563EB;
-  --primary-dark: #1E40AF;
-  --primary-light: #DBEAFE;
-  --primary-glow: rgba(37, 99, 235, 0.3);
-  --accent: #3B82F6;
-  --bg-white: #FFFFFF;
-  --bg-light: #F8FAFC;
-  --bg-dark: #0F172A;
-  --text-dark: #1E293B;
-  --text-medium: #475569;
-  --text-light: #94A3B8;
-  --text-white: #F1F5F9;
-  --border: #E2E8F0;
-  --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
-  --shadow-blue: 0 10px 40px -10px rgba(37, 99, 235, 0.3);
+  --primary: #00F0FF;
+  --primary-dark: #00B8CC;
+  --primary-light: rgba(0, 240, 255, 0.15);
+  --primary-glow: rgba(0, 240, 255, 0.3);
+  --accent: #00FFFF;
+  --bg-white: #050505;
+  --bg-light: #111111;
+  --bg-dark: #000000;
+  --text-dark: #F8FAFC;
+  --text-medium: #A1A1AA;
+  --text-light: #71717A;
+  --text-white: #FFFFFF;
+  --border: #27272A;
+  --shadow: 0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -2px rgba(0,0,0,0.5);
+  --shadow-lg: 0 20px 25px -5px rgba(0,0,0,0.5), 0 8px 10px -6px rgba(0,0,0,0.5);
+  --shadow-blue: 0 10px 40px -10px rgba(0, 240, 255, 0.3);
   --radius: 12px;
   --radius-lg: 20px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -73,7 +73,7 @@ body {
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(5, 5, 5, 0.9);
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
 }
@@ -266,7 +266,7 @@ body {
 
 .btn-primary {
   background-color: var(--primary);
-  color: white;
+  color: var(--bg-dark);
   box-shadow: var(--shadow-blue);
   border: none;
 }
@@ -284,7 +284,7 @@ body {
 
 .btn-secondary:hover {
   background-color: var(--primary);
-  color: white;
+  color: var(--bg-dark);
 }
 
 .btn-outline {
@@ -586,7 +586,7 @@ body {
 }
 
 .mv-card-front {
-  background-color: white;
+  background-color: var(--bg-white);
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
 }
@@ -605,7 +605,7 @@ body {
 .mv-card-back {
   transform: rotateY(180deg);
   background-color: var(--primary);
-  color: white;
+  color: var(--bg-dark);
 }
 
 .mv-card-back h3 {
@@ -638,7 +638,7 @@ body {
 
 .edu-card {
   position: relative;
-  background-color: white;
+  background-color: var(--bg-white);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   box-shadow: var(--shadow);
@@ -749,7 +749,7 @@ body {
 .project-card {
   display: grid;
   grid-template-columns: 200px 1fr;
-  background-color: white;
+  background-color: var(--bg-white);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -790,7 +790,7 @@ body {
 
 .project-card:hover .project-left {
   background-color: var(--primary-dark);
-  box-shadow: inset 0 0 30px rgba(37,99,235,0.3);
+  box-shadow: inset 0 0 30px rgba(0, 240, 255, 0.3);
 }
 
 .project-right {
@@ -891,7 +891,7 @@ body {
 }
 
 .skill-card {
-  background-color: white;
+  background-color: var(--bg-white);
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow);
@@ -1002,7 +1002,7 @@ body {
 }
 
 .cert-card {
-  background-color: white;
+  background-color: var(--bg-white);
   border-radius: var(--radius-lg);
   padding: 2rem;
   box-shadow: var(--shadow);
@@ -1014,7 +1014,7 @@ body {
 }
 
 .cert-card:hover {
-  background: linear-gradient(135deg, white, var(--primary-light));
+  background: linear-gradient(135deg, var(--bg-white), var(--primary-light));
 }
 
 .cert-badge {
@@ -1094,7 +1094,7 @@ body {
 }
 
 .contact-form-wrapper {
-  background-color: white;
+  background-color: var(--bg-white);
   padding: 3rem;
 }
 
@@ -1162,7 +1162,7 @@ body {
   width: 100%;
   padding: 16px;
   background-color: var(--primary);
-  color: white;
+  color: var(--bg-dark);
   border: none;
   border-radius: 50px;
   font-size: 1rem;
@@ -1322,7 +1322,7 @@ body {
 .footer-socials a:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background-color: rgba(37,99,235,0.1);
+  background-color: rgba(0, 240, 255, 0.1);
 }
 
 .footer-copy {
@@ -1519,7 +1519,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(5, 5, 5, 0.95);
     backdrop-filter: blur(10px);
     transition: right 0.4s ease;
   }
