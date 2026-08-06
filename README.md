@@ -4,7 +4,7 @@ This repository contains the source code for my personal cybersecurity portfolio
 
 ## Live Website
 
-https://umar-cysec.netlify.app/
+https://umar-cysec.vercel.app/
 
 ## About
 
