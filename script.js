@@ -252,10 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const formData = new FormData(contactForm);
             
-            fetch(contactForm.action, {
-                 method: 'POST',
-                headers: { 'Accept': 'application/json' },
-                 body: formData
+            fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
             })
             .then(() => {
                 if (sendBtn) {

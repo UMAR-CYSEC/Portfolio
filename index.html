@@ -3,459 +3,840 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Muhammad Umar, a Cybersecurity-focused Computer Science student and Aspiring SOC Analyst with hands-on experience in network packet analysis, SIEM, and incident response.">
-    <title>Muhammad Umar | Cybersecurity Portfolio</title>
-
-    <link rel="icon" type="image/png" href="favicon.png">
-
-    <!-- Google Fonts: Inter -->
+    <title>Muhammad Umar | Aspiring SOC Analyst</title>
+    <meta name="description" content="Portfolio of Muhammad Umar — Aspiring SOC Analyst and Cybersecurity Trainee with hands-on experience in network analysis, SIEM monitoring, and incident response.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Smooth Scrolling -->
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- NAVIGATION -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="#" class="nav-logo">MU</a>
-    <ul class="nav-links">
-      <li><a href="#landing">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#certifications">Certifications</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-      <span class="hamburger"></span>
+    <!-- ═══════════════ NAVIGATION ═══════════════ -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#landing" class="nav-logo" aria-label="Muhammad Umar — Home">MU</a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="#landing" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="muhammad-umar-resume.pdf" download="Muhammad_Umar_Resume.pdf" class="nav-cv-btn"><i class="fa-solid fa-file-arrow-down"></i> Resume</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ═══════════════ PAGE 1 — LANDING ═══════════════ -->
+    <section id="landing" class="section landing-section">
+        <div class="container landing-container">
+            <div class="landing-content">
+                <p class="landing-greeting" data-animate="fade-up">Hello, I'm</p>
+                <h1 class="landing-name" data-animate="fade-up" data-delay="100">Muhammad Umar</h1>
+                <p class="landing-designation" data-animate="fade-up" data-delay="200">Aspiring SOC Analyst | Cybersecurity Trainee</p>
+                <p class="landing-description" data-animate="fade-up" data-delay="300">Cybersecurity-focused aspiring SOC Analyst with hands-on experience in network traffic analysis, SIEM monitoring, Windows security log analysis, phishing analysis, and incident response. I work with tools and technologies including Wireshark, Splunk, Wazuh, Windows Event Viewer, Linux, TCP/IP, HTTP, DNS, and MITRE ATT&amp;CK. Through practical labs and security-focused projects, I am building strong blue-team and security operations skills. I am currently developing my capabilities toward a career in SOC operations and cybersecurity. Open to SOC Analyst Intern and Cybersecurity Intern opportunities.</p>
+                <div class="cta-buttons" data-animate="fade-up" data-delay="400">
+                    <a href="#about" class="btn btn-primary">Learn More About Me</a>
+                    <a href="muhammad-umar-resume.pdf" download="Muhammad_Umar_Resume.pdf" class="btn btn-cv"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="social-icons" data-animate="pop-in" data-delay="600">
+                    <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub Profile">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn Profile">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </a>
+                    <a href="mailto:muhammadumar12414@gmail.com" class="social-icon" aria-label="Send Email">
+                        <i class="fa-solid fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="landing-image" data-animate="fade-left">
+                <div class="profile-image-wrapper">
+                    <img src="profile.png" alt="Muhammad Umar — Professional Profile Photo" class="profile-photo-landing" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                    <div class="profile-photo-fallback">MU</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 2 — ABOUT ME ═══════════════ -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">About Me</h2>
+            <div class="about-content">
+                <div class="about-image" data-animate="slide-left">
+                    <div class="about-photo-wrapper">
+                        <img src="profile.png" alt="Muhammad Umar" class="profile-photo-about" onerror="this.style.display='none'; this.parentElement.classList.add('no-photo');">
+                        <div class="profile-photo-fallback">MU</div>
+                    </div>
+                    <div class="view-work-buttons" data-animate="slide-up" data-delay="300">
+                        <a href="#experience" class="view-work-btn"><i class="fa-solid fa-briefcase"></i> Work Experience</a>
+                        <a href="#education" class="view-work-btn"><i class="fa-solid fa-graduation-cap"></i> Education</a>
+                        <a href="#projects" class="view-work-btn"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+                        <a href="#skills" class="view-work-btn"><i class="fa-solid fa-chart-bar"></i> Skills</a>
+                        <a href="#certifications" class="view-work-btn"><i class="fa-solid fa-certificate"></i> Certifications</a>
+                    </div>
+                </div>
+                <div class="about-text" data-animate="fade-up" data-delay="200">
+                    <p class="about-summary">Muhammad Umar is an aspiring cybersecurity professional focused on SOC operations, security monitoring, blue-team practices, network security, and incident response. He currently works as a Cybersecurity Trainee at Astra Quantum Tech, participating in practical cybersecurity sessions, labs, security assessments, and industry mentorship. His hands-on work includes network traffic analysis with Wireshark, SIEM monitoring with Splunk and Wazuh, Windows security event analysis, phishing investigation, and incident response case studies. He has practical familiarity with TCP/IP, HTTP, DNS, TLS, SMTP, Linux, Windows, MITRE ATT&amp;CK, and security-focused tools. He is continuously strengthening his cybersecurity skills through practical projects, labs, and professional training while pursuing opportunities in SOC and cybersecurity roles.</p>
+                    <div class="mission-vision-cards">
+                        <div class="mv-card mission-card" data-animate="flip-in">
+                            <div class="mv-card-inner">
+                                <div class="mv-icon"><i class="fa-solid fa-bullseye"></i></div>
+                                <h3>Mission</h3>
+                                <p>To develop strong practical cybersecurity and blue-team skills while helping organizations detect, analyze, and respond to security threats effectively.</p>
+                            </div>
+                        </div>
+                        <div class="mv-card vision-card" data-animate="flip-in" data-delay="200">
+                            <div class="mv-card-inner">
+                                <div class="mv-icon"><i class="fa-solid fa-eye"></i></div>
+                                <h3>Vision</h3>
+                                <p>To become a highly capable cybersecurity professional specializing in SOC operations, threat detection, incident response, and defensive security.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 3 — WORK EXPERIENCE ═══════════════ -->
+    <section id="experience" class="section experience-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Work Experience</h2>
+            <div class="experience-timeline">
+
+                <!-- Experience Card 1 -->
+                <div class="experience-card" data-animate="slide-right">
+                    <div class="exp-left-panel">
+                        <div class="exp-company-badge">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <span class="exp-duration">Sep 2026 – Present</span>
+                    </div>
+                    <div class="exp-right-content">
+                        <div class="exp-header">
+                            <h3 class="exp-company">Arch Technologies</h3>
+                            <span class="exp-type">Internship / Remote</span>
+                        </div>
+                        <h4 class="exp-role">Intern</h4>
+                        <p class="exp-location"><i class="fa-solid fa-location-dot"></i> Peshawar, Khyber Pakhtunkhwa, Pakistan</p>
+                        <div class="exp-description">
+                            <p>Remote cybersecurity internship focused on practical, hands-on security tools and techniques — building and analyzing security tools in Python, with a project-based approach each month.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience Card 2 -->
+                <div class="experience-card" data-animate="slide-left">
+                    <div class="exp-left-panel">
+                        <div class="exp-company-badge">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </div>
+                        <span class="exp-duration">Aug 2026 – Present</span>
+                    </div>
+                    <div class="exp-right-content">
+                        <div class="exp-header">
+                            <h3 class="exp-company">Astra Quantum Tech</h3>
+                            <span class="exp-type">Trainee / Remote Learning Program</span>
+                        </div>
+                        <h4 class="exp-role">Cybersecurity Trainee</h4>
+                        <p class="exp-location"><i class="fa-solid fa-location-dot"></i> Peshawar, Khyber Pakhtunkhwa, Pakistan</p>
+                        <ul class="exp-bullets">
+                            <li class="exp-bullet" data-animate="fade-up" data-delay="100">Participating in the Summer of Cybersecurity 2026 program through live cybersecurity sessions, practical labs, security assessments, and industry mentorship.</li>
+                            <li class="exp-bullet" data-animate="fade-up" data-delay="200">Developing foundational knowledge of cybersecurity, networking, system security, threat analysis, and security best practices through hands-on training.</li>
+                            <li class="exp-bullet" data-animate="fade-up" data-delay="300">Collaborating with peers in a remote learning environment while applying cybersecurity concepts to practical exercises and security scenarios.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 4 — EDUCATION ═══════════════ -->
+    <section id="education" class="section education-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Education</h2>
+            <div class="education-grid">
+
+                <!-- Education Card 1 -->
+                <div class="education-card" data-animate="drop-in">
+                    <div class="edu-icon"><i class="fa-solid fa-university"></i></div>
+                    <h3 class="edu-institution">Qurtuba University of Science &amp; Information Technology</h3>
+                    <h4 class="edu-degree">Bachelor of Science in Computer Science (BSCS)</h4>
+                    <p class="edu-field">Information Technology</p>
+                    <p class="edu-location"><i class="fa-solid fa-location-dot"></i> Peshawar, Khyber Pakhtunkhwa, Pakistan</p>
+                    <span class="edu-status">Enrolled / Ongoing</span>
+                    <div class="edu-highlights">
+                        <h5>Key Focus</h5>
+                        <ul>
+                            <li>Computer Information Systems</li>
+                            <li>Software Development</li>
+                            <li>Network &amp; Cybersecurity Fundamentals</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education Card 2 -->
+                <div class="education-card" data-animate="rise-in" data-delay="150">
+                    <div class="edu-icon"><i class="fa-solid fa-school"></i></div>
+                    <h3 class="edu-institution">Fazaia Inter College, Shaheen Camp</h3>
+                    <h4 class="edu-degree">Intermediate in Computer Science (ICS)</h4>
+                    <p class="edu-location"><i class="fa-solid fa-location-dot"></i> Peshawar, Pakistan</p>
+                    <span class="edu-duration">June 2024 – June 2026 · Full-time</span>
+                    <div class="edu-highlights">
+                        <h5>Key Highlights</h5>
+                        <ul>
+                            <li>Computer Science, Physics, and Mathematics foundation.</li>
+                            <li>Developed an academic foundation in computing and technical subjects.</li>
+                            <li>Completed Intermediate-level education in the ICS stream.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Education Card 3 -->
+                <div class="education-card" data-animate="rise-in" data-delay="300">
+                    <div class="edu-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <h3 class="edu-institution">Fazaia Inter College, Shaheen Camp</h3>
+                    <h4 class="edu-degree">Matriculation in Science</h4>
+                    <p class="edu-location"><i class="fa-solid fa-location-dot"></i> Peshawar, Pakistan</p>
+                    <span class="edu-duration">May 2022 – May 2024 · Full-time</span>
+                    <div class="edu-highlights">
+                        <h5>Key Highlights</h5>
+                        <ul>
+                            <li>Completed secondary education in the Science group.</li>
+                            <li>Built foundational knowledge across science and technical subjects.</li>
+                            <li>Developed the academic foundation for further study in computer science and cybersecurity.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 5 — PROJECTS ═══════════════ -->
+    <section id="projects" class="section projects-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Projects</h2>
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">01</span>
+                        <span class="project-type">Cybersecurity / Network Analysis</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Network Traffic Analyzer</h3>
+                        <p class="project-desc">Analyzed network traffic using Wireshark to capture and inspect packets in a controlled environment. Examined communication patterns and packet-level details while investigating a simulated malware infection.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Identified a compromised host during a simulated malware investigation.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Investigated NBNS, Kerberos, and SAMR protocol activity.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Strengthened packet analysis and network troubleshooting skills.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Wireshark</span>
+                            <span class="tech-pill">TCP/IP</span>
+                            <span class="tech-pill">HTTP</span>
+                            <span class="tech-pill">DNS</span>
+                            <span class="tech-pill">TLS</span>
+                            <span class="tech-pill">Packet Analysis</span>
+                        </div>
+                        <a href="https://github.com/UMAR-CYSEC/Network-Traffic-Analyzer" target="_blank" rel="noopener noreferrer" class="project-link"><i class="fa-brands fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">02</span>
+                        <span class="project-type">Networking / Infrastructure</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Cisco Packet Tracer Network Simulation</h3>
+                        <p class="project-desc">Designed and configured network topologies in Cisco Packet Tracer to simulate real-world enterprise environments and routing infrastructure.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Implemented VLAN segmentation, inter-VLAN routing, and subnetting strategies.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Configured dynamic routing protocols and core network services like DHCP and DNS.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Applied basic network security controls and access lists to secure traffic.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Cisco Packet Tracer</span>
+                            <span class="tech-pill">Routing &amp; Switching</span>
+                            <span class="tech-pill">VLANs</span>
+                            <span class="tech-pill">Subnetting</span>
+                            <span class="tech-pill">Network Protocols</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">03</span>
+                        <span class="project-type">Blue Team / SIEM Lab</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Home SIEM Lab</h3>
+                        <p class="project-desc">Built a home SIEM lab using Splunk and Wazuh to centralize Windows event logs and monitor endpoint activity in a virtualized environment.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Centralized Windows security event logs.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Created security monitoring dashboards.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Investigated security alerts to develop practical SIEM detection and analysis experience.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Splunk</span>
+                            <span class="tech-pill">Wazuh</span>
+                            <span class="tech-pill">SIEM</span>
+                            <span class="tech-pill">Windows Event Logs</span>
+                            <span class="tech-pill">VirtualBox</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">04</span>
+                        <span class="project-type">Systems Admin / Identity</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Active Directory Enterprise Lab</h3>
+                        <p class="project-desc">Built a virtualized Active Directory environment on Windows Server to practice centralized identity, access management, and enterprise domain administration.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Managed user accounts, Organizational Units (OUs), and group membership permissions.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Configured and deployed Group Policy Objects (GPOs) for system security and compliance.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Set up core domain infrastructure including Active Directory Domain Services (AD DS) and DNS.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Windows Server</span>
+                            <span class="tech-pill">Active Directory</span>
+                            <span class="tech-pill">GPO</span>
+                            <span class="tech-pill">DNS</span>
+                            <span class="tech-pill">User Management</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">05</span>
+                        <span class="project-type">Blue Team / Detection</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Windows Security Event Log Analysis</h3>
+                        <p class="project-desc">Simulated attacker behaviors on a Windows virtual machine and analyzed resulting security events using Windows Event Viewer.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Investigated Windows security events.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Mapped observed findings to MITRE ATT&amp;CK techniques.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Developed practical understanding of indicators of compromise and attacker behavior.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Windows Event Logs</span>
+                            <span class="tech-pill">Event Viewer</span>
+                            <span class="tech-pill">MITRE ATT&amp;CK</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">06</span>
+                        <span class="project-type">Email Security / Phishing</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Phishing Email Analyzer</h3>
+                        <p class="project-desc">Analyzed suspicious emails by examining email headers, sender authentication records, URLs, and attachments to identify phishing indicators.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Investigated suspicious email headers.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Evaluated sender authentication mechanisms.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Applied SPF, DKIM, and DMARC concepts to assess email authenticity.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">Email Headers</span>
+                            <span class="tech-pill">SMTP</span>
+                            <span class="tech-pill">SPF</span>
+                            <span class="tech-pill">DKIM</span>
+                            <span class="tech-pill">DMARC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card" data-animate="slide-in-blur">
+                    <div class="project-left">
+                        <span class="project-number">07</span>
+                        <span class="project-type">Incident Response / Blue Team</span>
+                    </div>
+                    <div class="project-right">
+                        <h3 class="project-title">Incident Response Case Study</h3>
+                        <p class="project-desc">Investigated a simulated security incident using the NIST incident response framework and documented the attack timeline and indicators of compromise.</p>
+                        <div class="project-outcomes">
+                            <h4>Key Outcomes</h4>
+                            <div class="outcome-boxes">
+                                <div class="outcome-box" data-animate="pop" data-delay="100">Investigated a simulated security incident.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="200">Documented the attack timeline and indicators of compromise.</div>
+                                <div class="outcome-box" data-animate="pop" data-delay="300">Practiced identification, analysis, containment, and recovery stages.</div>
+                            </div>
+                        </div>
+                        <div class="tech-pills">
+                            <span class="tech-pill">NIST Incident Response</span>
+                            <span class="tech-pill">Log Analysis</span>
+                            <span class="tech-pill">IOC Analysis</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 6 — SKILLS ═══════════════ -->
+    <section id="skills" class="section skills-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Skills</h2>
+            <p class="section-subtitle" data-animate="fade-up" data-delay="100">Visual representations of current skill confidence based on practical experience and projects.</p>
+            <div class="skills-grid">
+
+                <!-- Cybersecurity & SOC -->
+                <div class="skills-category" data-animate="scale-in">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h3>Cybersecurity &amp; SOC</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">SOC Operations</span><span class="skill-percent" data-value="80">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Security Monitoring</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Incident Response</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Log Analysis</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Threat Analysis</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">IOC Analysis</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Networking & Protocols -->
+                <div class="skills-category" data-animate="scale-in" data-delay="100">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3>Networking &amp; Protocols</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">TCP/IP</span><span class="skill-percent" data-value="82">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">HTTP</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">DNS</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">TLS</span><span class="skill-percent" data-value="72">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">SMTP</span><span class="skill-percent" data-value="70">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tools -->
+                <div class="skills-category" data-animate="scale-in" data-delay="200">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h3>Security Tools</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Wireshark</span><span class="skill-percent" data-value="82">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Splunk</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Wazuh</span><span class="skill-percent" data-value="72">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Windows Event Viewer</span><span class="skill-percent" data-value="80">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="80"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">MITRE ATT&amp;CK</span><span class="skill-percent" data-value="72">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operating Systems -->
+                <div class="skills-category" data-animate="scale-in" data-delay="300">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-desktop"></i></div>
+                        <h3>Operating Systems</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Windows 10/11</span><span class="skill-percent" data-value="82">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Linux</span><span class="skill-percent" data-value="72">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="72"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Programming & Technical Tools -->
+                <div class="skills-category" data-animate="scale-in" data-delay="400">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-code"></i></div>
+                        <h3>Programming &amp; Technical Tools</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Python</span><span class="skill-percent" data-value="70">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Git</span><span class="skill-percent" data-value="70">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">GitHub</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">VirtualBox</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other -->
+                <div class="skills-category" data-animate="scale-in" data-delay="500">
+                    <div class="category-header">
+                        <div class="category-icon"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3>Other</h3>
+                    </div>
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Technical Documentation</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Troubleshooting</span><span class="skill-percent" data-value="78">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="78"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Microsoft Office</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Canva</span><span class="skill-percent" data-value="75">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="75"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info"><span class="skill-name">Graphic Design</span><span class="skill-percent" data-value="70">0%</span></div>
+                            <div class="skill-bar"><div class="skill-fill" data-width="70"></div></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 7 — CERTIFICATIONS ═══════════════ -->
+    <section id="certifications" class="section certifications-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Certifications</h2>
+            <div class="certifications-grid">
+
+                <!-- Cert 1 -->
+                <div class="cert-card" data-animate="waterfall" data-delay="0">
+                    <div class="cert-badge">
+                        <i class="fa-brands fa-google"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Google Cybersecurity Professional Certificate</h3>
+                        <p class="cert-provider">Google via Coursera</p>
+                        <span class="cert-status in-progress">In Progress</span>
+                    </div>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="cert-card" data-animate="waterfall" data-delay="150">
+                    <div class="cert-image-wrapper">
+                        <img src="cert-cisco.JPG" alt="Cisco Introduction to Cybersecurity Certificate" class="cert-image">
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Introduction to Cybersecurity</h3>
+                        <p class="cert-provider">Cisco Networking Academy</p>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="cert-card" data-animate="waterfall" data-delay="300">
+                    <div class="cert-image-wrapper">
+                        <img src="cert-hackviser.JPG" alt="Hackviser Certified Cybersecurity Foundations Certificate" class="cert-image">
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Certified Cybersecurity Foundations</h3>
+                        <p class="cert-provider">Hackviser</p>
+                        <span class="cert-status completed">Completed</span>
+                    </div>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="cert-card" data-animate="waterfall" data-delay="450">
+                    <div class="cert-image-wrapper">
+                        <img src="cert-forage.JPG" alt="Mastercard Cybersecurity Job Simulation Certificate via Forage" class="cert-image">
+                    </div>
+                    <div class="cert-badge">
+                        <i class="fa-solid fa-credit-card"></i>
+                    </div>
+                    <div class="cert-info">
+                        <h3 class="cert-name">Cybersecurity Job Simulation</h3>
+                        <p class="cert-provider">Mastercard via Forage</p>
+                        <span class="cert-status completed">Completed · September 2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 8 — ACHIEVEMENTS ═══════════════ -->
+    <section id="achievements" class="section achievements-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Achievements &amp; Recognition</h2>
+            <p class="section-subtitle" data-animate="fade-up" data-delay="100">Building practical cybersecurity skills through hands-on labs, projects, training, and professional development.</p>
+
+            <!-- Stat Counters -->
+            <div class="stat-counters" data-animate="fade-up" data-delay="200">
+                <div class="stat-counter">
+                    <span class="stat-number" data-target="1">0</span><span class="stat-plus">+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-counter">
+                    <span class="stat-number" data-target="4">0</span>
+                    <span class="stat-label">Certifications</span>
+                </div>
+                <div class="stat-counter">
+                    <span class="stat-number" data-target="7">0</span>
+                    <span class="stat-label">Projects</span>
+                </div>
+                <div class="stat-counter">
+                    <span class="stat-number" data-target="0">0</span>
+                    <span class="stat-label">Awards</span>
+                </div>
+            </div>
+
+            <!-- Achievement Cards -->
+            <div class="achievements-grid">
+
+                <div class="achievement-card" data-animate="zoom-spring">
+                    <div class="achievement-badge professional">Professional</div>
+                    <h3 class="achievement-title">Cybersecurity Internship</h3>
+                    <p class="achievement-institution">Arch Technologies</p>
+                    <span class="achievement-year">2026</span>
+                    <p class="achievement-desc">Participating in a remote cybersecurity internship focused on building and analyzing practical security tools in Python, applying hands-on technical concepts, and collaborating on monthly project-based tasks.</p>
+                </div>
+
+                <div class="achievement-card" data-animate="zoom-spring" data-delay="150">
+                    <div class="achievement-badge professional">Professional</div>
+                    <h3 class="achievement-title">Summer of Cybersecurity 2026</h3>
+                    <p class="achievement-institution">Astra Quantum Tech</p>
+                    <span class="achievement-year">2026</span>
+                    <p class="achievement-desc">Participating in a cybersecurity training program involving live cybersecurity sessions, practical labs, security assessments, and industry mentorship.</p>
+                </div>
+
+                <div class="achievement-card" data-animate="zoom-spring" data-delay="300">
+                    <div class="achievement-badge professional">Professional</div>
+                    <h3 class="achievement-title">Cybersecurity Certification Progress</h3>
+                    <p class="achievement-institution">Google, Cisco Networking Academy &amp; Hackviser</p>
+                    <span class="achievement-year">2026</span>
+                    <p class="achievement-desc">Building cybersecurity knowledge through professional training and certifications covering cybersecurity foundations and practical security concepts.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ PAGE 9 — CONTACT ═══════════════ -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2 class="section-title" data-animate="fade-up">Let's Connect</h2>
+            <div class="contact-container">
+
+                <!-- Left Column — Contact Form -->
+                <div class="contact-form-wrapper" data-animate="slide-angle-left">
+                    <h3>Send Me a Message</h3>
+                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrpzgrvj" method="POST" novalidate>
+                        <div class="form-group">
+                            <input type="text" id="form-name" name="name" required autocomplete="name">
+                            <label for="form-name" class="floating-label">Full Name</label>
+                            <div class="form-underline"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="form-email" name="email" required autocomplete="email">
+                            <label for="form-email" class="floating-label">Email Address</label>
+                            <div class="form-underline"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="form-subject" name="subject" required>
+                            <label for="form-subject" class="floating-label">Subject</label>
+                            <div class="form-underline"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="form-message" name="message" rows="5" required></textarea>
+                            <label for="form-message" class="floating-label">Message</label>
+                            <div class="form-underline"></div>
+                        </div>
+                        <button type="submit" class="btn btn-send" id="btn-send">
+                            <span class="btn-text">Send Message</span>
+                            <span class="btn-loading" aria-hidden="true"><i class="fa-solid fa-spinner fa-spin"></i> Sending...</span>
+                            <span class="btn-success" aria-hidden="true"><i class="fa-solid fa-check"></i> Sent!</span>
+                        </button>
+                        <p class="form-status" id="form-status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <!-- Right Column — Contact Info -->
+                <div class="contact-info-wrapper" data-animate="slide-angle-right">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info-list">
+                        <a href="mailto:muhammadumar12414@gmail.com" class="contact-info-row">
+                            <div class="contact-info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Email</span>
+                                <span class="contact-info-value">muhammadumar12414@gmail.com</span>
+                            </div>
+                        </a>
+                        <a href="tel:+923341909305" class="contact-info-row">
+                            <div class="contact-info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Phone</span>
+                                <span class="contact-info-value">+92 334 1909305</span>
+                            </div>
+                        </a>
+                        <div class="contact-info-row">
+                            <div class="contact-info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">Location</span>
+                                <span class="contact-info-value">Peshawar, Khyber Pakhtunkhwa, Pakistan</span>
+                            </div>
+                        </div>
+                        <a href="https://www.linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" class="contact-info-row">
+                            <div class="contact-info-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">LinkedIn</span>
+                                <span class="contact-info-value">muhammad-umar-cy</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" class="contact-info-row">
+                            <div class="contact-info-icon"><i class="fa-brands fa-github"></i></div>
+                            <div class="contact-info-text">
+                                <span class="contact-info-label">GitHub</span>
+                                <span class="contact-info-value">UMAR-CYSEC</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="footer-logo">MU</span>
+                    <h4>Muhammad Umar</h4>
+                    <p class="footer-tagline">Aspiring SOC Analyst | Building practical cybersecurity and blue-team skills</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="mailto:muhammadumar12414@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+                <p class="footer-copy">&copy; 2026 Muhammad Umar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up"></i>
     </button>
-  </div>
-</nav>
 
-<!-- SECTION 1: LANDING -->
-<section id="landing" class="section landing-section">
-  <div class="landing-container">
-    <div class="landing-content">
-      <p class="landing-greeting animate-item">Hello, I'm</p>
-      <h1 class="landing-name animate-item">Muhammad Umar</h1>
-      <p class="landing-designation animate-item">Aspiring SOC Analyst | Cybersecurity Enthusiast</p>
-      <p class="landing-intro animate-item">Cybersecurity-focused Computer Science student with hands-on experience in network packet analysis and a growing foundation in blue team fundamentals. Certified in core cybersecurity concepts through Cisco Networking Academy and HackerViser, with the Google Cybersecurity Professional Certificate currently in progress. Comfortable working with TCP/IP, HTTP, DNS, and TLS, and actively building SOC-focused skills through hands-on labs in SIEM, log analysis, and incident response. Currently pursuing a BS in Computer Science while building a portfolio of real, documented security projects. Seeking a SOC Analyst Intern or Cybersecurity Intern role to apply these skills in a real security operations environment.</p>
-      <div class="landing-cta-group animate-item">
-        <a href="#about" class="btn btn-primary"><i class="fas fa-user"></i> Learn More About Me</a>
-        <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i> Get In Touch</a>
-        <a href="muhammad-umar-resume.pdf" target="_blank" rel="noopener noreferrer" class="btn btn-outline"><i class="fas fa-download"></i> Download My Resume</a>
-      </div>
-      <div class="landing-socials animate-item">
-        <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="mailto:muhammadumar12414@gmail.com" class="social-icon" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
-    </div>
-    <div class="landing-visual animate-item">
-      <div class="hero-graphic">
-        <div class="cyber-grid"></div>
-        <div class="floating-shield"><i class="fas fa-shield-halved"></i></div>
-        <div class="floating-lock"><i class="fas fa-lock"></i></div>
-        <div class="floating-code"><i class="fas fa-code"></i></div>
-      </div>
-    </div>
-  </div>
-  <div class="scroll-indicator">
-    <div class="mouse"><div class="wheel"></div></div>
-    <p>Scroll Down</p>
-  </div>
-</section>
-
-<!-- SECTION 2: ABOUT ME -->
-<section id="about" class="section about-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">About</span> Me</h2>
-    <div class="about-grid">
-      <div class="about-photo-wrapper animate-item" data-animation="slide-left">
-        <div class="photo-frame">
-          <div class="frame-border"></div>
-          <img src="profile.png" alt="Muhammad Umar" class="profile-photo-placeholder" style="object-fit: cover; display: block;">
-        </div>
-        <div class="view-work-buttons">
-          <a href="#education" class="view-btn animate-item"><i class="fas fa-graduation-cap"></i> Education</a>
-          <a href="#projects" class="view-btn animate-item"><i class="fas fa-project-diagram"></i> Projects</a>
-          <a href="#skills" class="view-btn animate-item"><i class="fas fa-chart-bar"></i> Skills</a>
-          <a href="#certifications" class="view-btn animate-item"><i class="fas fa-certificate"></i> Certifications</a>
-        </div>
-      </div>
-      <div class="about-content">
-        <p class="about-text animate-item">I'm a Computer Science student based in Peshawar, Pakistan, with a clear focus on cybersecurity — specifically the blue team / SOC analyst path. My hands-on experience centers on network packet analysis with Wireshark, where I've worked through real HTTP traffic captures and a simulated malware infection, tracing a compromised host across multiple protocols. I hold certifications in core cybersecurity fundamentals from Cisco Networking Academy and HackerViser, and I'm currently completing the Google Cybersecurity Professional Certificate. I'm comfortable with core networking concepts — TCP/IP, HTTP, DNS, TLS — and I'm expanding into SIEM tooling, log analysis, and incident response through self-built labs. Alongside the technical side, I bring design skills in Canva and graphic design, which I use to keep my documentation and portfolio presentation polished. I'm currently pursuing a BS in Computer Science at Qurtuba University while building out a portfolio of real, documented security projects rather than just coursework. What sets me apart is that every project I showcase is hands-on and verifiable — real captures, real writeups, real GitHub repos.</p>
-        <div class="mission-vision-cards">
-          <div class="mv-card mission-card animate-item" data-animation="flip">
-            <div class="mv-card-inner">
-              <div class="mv-card-front">
-                <i class="fas fa-bullseye"></i>
-                <h3>Mission</h3>
-              </div>
-              <div class="mv-card-back">
-                <h3>Mission</h3>
-                <p>To build real, demonstrable blue team skills through hands-on labs and documented projects, and to earn an entry-level SOC analyst role where I can apply them in a live environment.</p>
-              </div>
-            </div>
-          </div>
-          <div class="mv-card vision-card animate-item" data-animation="flip" data-delay="200">
-            <div class="mv-card-inner">
-              <div class="mv-card-front">
-                <i class="fas fa-eye"></i>
-                <h3>Vision</h3>
-              </div>
-              <div class="mv-card-back">
-                <h3>Vision</h3>
-                <p>To grow from SOC analyst into a well-rounded security professional with a specialization in cloud security, while continuing to learn and contribute to the security community.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 3: EDUCATION -->
-<section id="education" class="section education-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">My</span> Education</h2>
-    <div class="education-timeline">
-      <div class="edu-card animate-item" data-animation="drop-in">
-        <div class="edu-card-border"></div>
-        <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-        <div class="edu-content">
-          <h3>Bachelor of Science in Computer Science</h3>
-          <p class="edu-institution"><i class="fas fa-university"></i> Qurtuba University of Science and Information Technology, Peshawar, Pakistan</p>
-          <p class="edu-duration"><i class="fas fa-calendar-alt"></i> Aug 2026 – 2030 (Expected) · Full-time</p>
-          <div class="edu-highlights">
-            <h4>Key Highlights:</h4>
-            <ul>
-              <li class="highlight-item">Building core Computer Science foundations alongside a cybersecurity specialization</li>
-              <li class="highlight-item">Coursework spanning programming, networks, and systems fundamentals</li>
-              <li class="highlight-item">Balancing degree studies with hands-on security labs and industry certifications</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="edu-card animate-item" data-animation="rise-up">
-        <div class="edu-card-border"></div>
-        <div class="edu-icon"><i class="fas fa-graduation-cap"></i></div>
-        <div class="edu-content">
-          <h3>Intermediate in Computer Science (ICS)</h3>
-          <p class="edu-institution"><i class="fas fa-university"></i> Federal Board (FBISE) – Fazaia Inter College Peshawar, Pakistan</p>
-          <p class="edu-duration"><i class="fas fa-calendar-alt"></i> 2024 – 2026 · Completed</p>
-          <div class="edu-highlights">
-            <h4>Key Highlights:</h4>
-            <ul>
-              <li class="highlight-item">Specialized in Physics, Mathematics, and Computer Science</li>
-              <li class="highlight-item">Built a strong analytical and quantitative problem-solving foundation</li>
-              <li class="highlight-item">First formal exposure to computing and networking concepts</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 4: PROJECTS -->
-<section id="projects" class="section projects-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">My</span> Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card animate-item">
-        <div class="project-left">
-          <span class="project-number">01</span>
-          <div class="project-type"><i class="fas fa-shield-halved"></i> Security Project</div>
-        </div>
-        <div class="project-right">
-          <h3 class="project-title">Network Traffic Analyzer</h3>
-          <p class="project-desc">Analyzing live network traffic and a simulated malware infection using Wireshark, unifying five sub-projects into one portfolio piece covering HTTP, malware, intrusion detection, TLS, and VoIP traffic analysis.</p>
-          <div class="project-outcomes">
-            <h4>Key Outcomes:</h4>
-            <div class="outcome-boxes">
-              <div class="outcome-box"><span class="outcome-number">5</span> planned modules completed and published on GitHub</div>
-              <div class="outcome-box">Identified a compromised host across <span class="outcome-number">3</span> protocols (NBNS, Kerberos, SAMR) in a simulated malware infection</div>
-              <div class="outcome-box">Captured and analyzed live HTTP traffic with full packet and TCP stream breakdowns</div>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">Wireshark</span>
-            <span class="tech-pill">TCP/IP</span>
-            <span class="tech-pill">HTTP</span>
-            <span class="tech-pill">DNS</span>
-            <span class="tech-pill">TLS</span>
-            <span class="tech-pill">Packet Analysis</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card animate-item">
-        <div class="project-left">
-          <span class="project-number">02</span>
-          <div class="project-type"><i class="fas fa-flask"></i> Security Lab</div>
-        </div>
-        <div class="project-right">
-          <h3 class="project-title">Home SIEM Lab with Splunk & Wazuh</h3>
-          <p class="project-desc">Built a home SIEM lab using Splunk and Wazuh across multiple virtual machines to collect, monitor, and analyze security logs. Configured log forwarding, created dashboards, and investigated security events to simulate real-world SOC workflows.</p>
-          <div class="project-outcomes">
-            <h4>Key Outcomes:</h4>
-            <div class="outcome-boxes">
-              <div class="outcome-box"><span class="outcome-number">2</span> Splunk and Wazuh integrated for centralized log collection and monitoring.</div>
-              <div class="outcome-box"><span class="outcome-number">3</span> detection dashboards planned: failed logins, privilege escalation, suspicious processes</div>
-              <div class="outcome-box"><span class="outcome-number">5</span> Windows security events analyzed to simulate real-world SOC investigations.</div>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">Splunk</span>
-            <span class="tech-pill">Wazuh</span>
-            <span class="tech-pill">Windows Event Logs</span>
-            <span class="tech-pill">SIEM</span>
-            <span class="tech-pill">Virtual Machines</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card animate-item">
-        <div class="project-left">
-          <span class="project-number">03</span>
-          <div class="project-type"><i class="fas fa-shield-halved"></i> Security Project</div>
-        </div>
-        <div class="project-right">
-          <h3 class="project-title">Windows Security Event Log Analysis</h3>
-          <p class="project-desc">Simulating attacker behaviors on a Windows VM and mapping findings to the MITRE ATT&CK framework.</p>
-          <div class="project-outcomes">
-            <h4>Key Outcomes:</h4>
-            <div class="outcome-boxes">
-              <div class="outcome-box"><span class="outcome-number">3</span> attacker behaviors simulated: failed RDP logins, admin account creation, scheduled task abuse</div>
-              <div class="outcome-box">Findings mapped directly to MITRE ATT&CK techniques</div>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">Windows Event Logs</span>
-            <span class="tech-pill">MITRE ATT&CK</span>
-            <span class="tech-pill">VM</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card animate-item">
-        <div class="project-left">
-          <span class="project-number">04</span>
-          <div class="project-type"><i class="fas fa-shield-halved"></i> Security Project</div>
-        </div>
-        <div class="project-right">
-          <h3 class="project-title">Phishing Email Analyzer</h3>
-          <p class="project-desc">Analyzing suspicious email headers and content to identify phishing indicators.</p>
-          <div class="project-outcomes">
-            <h4>Key Outcomes:</h4>
-            <div class="outcome-boxes">
-              <div class="outcome-box">Building a repeatable methodology for header and content-based phishing analysis</div>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">Email Header Analysis</span>
-            <span class="tech-pill">Phishing Indicators</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-card animate-item">
-        <div class="project-left">
-          <span class="project-number">05</span>
-          <div class="project-type"><i class="fas fa-shield-halved"></i> Security Project</div>
-        </div>
-        <div class="project-right">
-          <h3 class="project-title">Incident Response Case Study</h3>
-          <p class="project-desc">Documenting a simulated security incident from detection through containment and remediation.</p>
-          <div class="project-outcomes">
-            <h4>Key Outcomes:</h4>
-            <div class="outcome-boxes">
-              <div class="outcome-box">Full incident lifecycle documented: detection, containment, remediation</div>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span class="tech-pill">Incident Response</span>
-            <span class="tech-pill">Technical Documentation</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 5: SKILLS -->
-<section id="skills" class="section skills-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">My</span> Skills</h2>
-    <div class="skills-grid">
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fas fa-code"></i></div>
-        <h3>Programming Languages</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>Python</span><span class="skill-percent" data-target="72">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="72"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fas fa-network-wired"></i></div>
-        <h3>Networking & Protocols</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>TCP/IP</span><span class="skill-percent" data-target="80">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="80"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>HTTP</span><span class="skill-percent" data-target="78">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>DNS</span><span class="skill-percent" data-target="75">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>TLS</span><span class="skill-percent" data-target="70">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fas fa-shield-halved"></i></div>
-        <h3>Security Tools</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>Wireshark</span><span class="skill-percent" data-target="82">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="82"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>Packet Analysis</span><span class="skill-percent" data-target="78">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>Cisco Packet Tracer</span><span class="skill-percent" data-target="74">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="74"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fas fa-desktop"></i></div>
-        <h3>Operating Systems</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>Linux (Linux Mint)</span><span class="skill-percent" data-target="73">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="73"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>Windows</span><span class="skill-percent" data-target="85">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="85"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fab fa-git-alt"></i></div>
-        <h3>Developer Tools</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>Git</span><span class="skill-percent" data-target="75">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="75"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>GitHub</span><span class="skill-percent" data-target="78">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="78"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>Netlify</span><span class="skill-percent" data-target="70">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="70"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-card animate-item">
-        <div class="skill-icon"><i class="fas fa-palette"></i></div>
-        <h3>Design</h3>
-        <div class="skill-bar-group">
-          <div class="skill-item"><div class="skill-info"><span>Canva</span><span class="skill-percent" data-target="83">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="83"></div></div></div>
-          <div class="skill-item"><div class="skill-info"><span>Graphic Design</span><span class="skill-percent" data-target="76">0%</span></div><div class="skill-bar"><div class="skill-fill" data-width="76"></div></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 6: CERTIFICATIONS -->
-<section id="certifications" class="section certifications-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">My</span> Certifications</h2>
-    <div class="certs-grid">
-      <div class="cert-card animate-item" data-tilt>
-        <div class="cert-badge"><i class="fab fa-google"></i></div>
-        <div class="cert-image-placeholder"><i class="fas fa-certificate"></i><span>Certificate Image</span></div>
-        <h3>Google Cybersecurity Professional Certificate</h3>
-        <p class="cert-provider">Google (via Coursera)</p>
-        <span class="cert-status in-progress"><i class="fas fa-spinner fa-pulse"></i> In Progress</span>
-      </div>
-      <div class="cert-card animate-item" data-tilt>
-        <div class="cert-badge"><i class="fas fa-network-wired"></i></div>
-        <img src="cert-cisco.JPG" alt="Introduction to Cybersecurity Certificate" class="cert-image-placeholder" style="object-fit: cover;">
-        <h3>Introduction to Cybersecurity</h3>
-        <p class="cert-provider">Cisco Networking Academy</p>
-        <span class="cert-status completed"><i class="fas fa-check-circle"></i> Completed</span>
-      </div>
-      <div class="cert-card animate-item" data-tilt>
-        <div class="cert-badge"><i class="fas fa-user-shield"></i></div>
-        <img src="cert-hackviser.JPG" alt="Core Cybersecurity Course Certificate" class="cert-image-placeholder" style="object-fit: cover;">
-        <h3>Core Cybersecurity Course</h3>
-        <p class="cert-provider">HackerViser</p>
-        <span class="cert-status completed"><i class="fas fa-check-circle"></i> Completed</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SECTION 7: CONTACT -->
-<section id="contact" class="section contact-section">
-  <div class="section-container">
-    <h2 class="section-title animate-item"><span class="title-accent">Let's</span> Connect</h2>
-    <p class="section-subtitle animate-item">Have a question or want to work together? Feel free to reach out!</p>
-    <div class="contact-grid">
-      <div class="contact-form-wrapper animate-item" data-animation="slide-bl">
-        <h3>Send Me a Message</h3>
-        <form id="contactForm" class="contact-form" name="contactForm" method="POST" action="https://formspree.io/f/mrpzgrvj">
-          <div class="form-group">
-            <input type="text" id="fullName" name="fullName" required autocomplete="name">
-            <label for="fullName">Full Name</label>
-            <div class="field-underline"></div>
-          </div>
-          <div class="form-group">
-            <input type="email" id="emailAddr" name="email" required autocomplete="email">
-            <label for="emailAddr">Email Address</label>
-            <div class="field-underline"></div>
-          </div>
-          <div class="form-group">
-            <input type="text" id="subject" name="subject" required>
-            <label for="subject">Subject</label>
-            <div class="field-underline"></div>
-          </div>
-          <div class="form-group">
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <label for="message">Message</label>
-            <div class="field-underline"></div>
-          </div>
-          <button type="submit" class="btn btn-submit" id="sendBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
-        </form>
-      </div>
-      <div class="contact-info-panel animate-item" data-animation="slide-br">
-        <h3>Contact Information</h3>
-        <p class="info-subtitle">Feel free to reach out through any of the channels below.</p>
-        <div class="info-rows">
-          <a href="mailto:muhammadumar12414@gmail.com" class="info-row"><i class="fas fa-envelope"></i><div><span class="info-label">Email</span><span class="info-value">muhammadumar12414@gmail.com</span></div></a>
-          <a href="tel:+923341909305" class="info-row"><i class="fas fa-phone"></i><div><span class="info-label">Phone</span><span class="info-value">0334-1909305</span></div></a>
-          <div class="info-row"><i class="fas fa-map-marker-alt"></i><div><span class="info-label">Location</span><span class="info-value">Peshawar, KPK, Pakistan</span></div></div>
-          <a href="https://linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" class="info-row"><i class="fab fa-linkedin-in"></i><div><span class="info-label">LinkedIn</span><span class="info-value">muhammad-umar-cy</span></div></a>
-          <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" class="info-row"><i class="fab fa-github"></i><div><span class="info-label">GitHub</span><span class="info-value">UMAR-CYSEC</span></div></a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="footer-container">
-    <div class="footer-brand">
-      <a href="#landing" class="footer-logo">MU</a>
-      <p class="footer-name">Muhammad Umar</p>
-      <p class="footer-tagline">Turning packets into insights, one log at a time.</p>
-    </div>
-    <div class="footer-socials">
-      <a href="https://github.com/UMAR-CYSEC" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://linkedin.com/in/muhammad-umar-cy" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-      <a href="mailto:muhammadumar12414@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-    </div>
-    <p class="footer-copy">&copy; 2026 Muhammad Umar. All rights reserved.</p>
-  </div>
-</footer>
-
-<script src="script.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
