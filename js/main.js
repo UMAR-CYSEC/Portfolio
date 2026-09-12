@@ -98,7 +98,7 @@
     }
 
     function handleBackToTop() {
-        if (window.scrollY > 500) {
+        if (window.scrollY > 300) {
             backToTop.classList.add('visible');
         } else {
             backToTop.classList.remove('visible');
@@ -506,7 +506,448 @@
         setupPhotoBloom();
         setupExpBulletStagger();
         setupOutcomeBoxPop();
+        initCyberBackground();
     }
+
+    /* ═══════════════════════════════════════════
+       LIVE 3D CYBER GRID BACKGROUND (ALWAYS RUNNING)
+       ═══════════════════════════════════════════ */
+    function initCyberBackground() {
+        const bgCanvas = document.getElementById('cyber-bg-canvas');
+        if (!bgCanvas) return;
+        const bgCtx = bgCanvas.getContext('2d');
+
+        function resizeBg() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeBg);
+        resizeBg();
+
+        let gridZ = 0;
+        const stars = [];
+        for (let i = 0; i < 60; i++) {
+            stars.push({
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * (window.innerHeight * 0.5),
+                size: Math.random() * 1.5 + 0.5,
+                alpha: Math.random() * 0.7 + 0.3,
+                speed: Math.random() * 0.25 + 0.05
+            });
+        }
+
+        function renderBg() {
+            bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+            const horizon = bgCanvas.height * 0.42;
+
+            // Distant cyber stars
+            stars.forEach(s => {
+                s.y += s.speed;
+                if (s.y > horizon) s.y = 0;
+                bgCtx.fillStyle = `rgba(56, 189, 248, ${s.alpha * 0.5})`;
+                bgCtx.fillRect(s.x, s.y, s.size, s.size);
+            });
+
+            // Horizon Glow
+            const glow = bgCtx.createLinearGradient(0, horizon - 20, 0, horizon + 50);
+            glow.addColorStop(0, 'rgba(6, 182, 212, 0)');
+            glow.addColorStop(0.5, 'rgba(6, 182, 212, 0.2)');
+            glow.addColorStop(1, 'rgba(6, 182, 212, 0)');
+            bgCtx.fillStyle = glow;
+            bgCtx.fillRect(0, horizon - 20, bgCanvas.width, 70);
+
+            // Horizon boundary line
+            bgCtx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
+            bgCtx.lineWidth = 1;
+            bgCtx.beginPath();
+            bgCtx.moveTo(0, horizon);
+            bgCtx.lineTo(bgCanvas.width, horizon);
+            bgCtx.stroke();
+
+            // 3D Perspective Lines
+            gridZ = (gridZ + 0.35) % 40;
+            const lines = 24;
+            bgCtx.strokeStyle = 'rgba(6, 182, 212, 0.15)';
+            bgCtx.lineWidth = 1;
+
+            for (let i = 0; i <= lines; i++) {
+                const bottomX = (bgCanvas.width / lines) * i;
+                const topX = bgCanvas.width * 0.5 + (bottomX - bgCanvas.width * 0.5) * 0.12;
+                bgCtx.beginPath();
+                bgCtx.moveTo(topX, horizon);
+                bgCtx.lineTo(bottomX, bgCanvas.height);
+                bgCtx.stroke();
+            }
+
+            // Moving horizontal grid lines
+            for (let y = horizon; y < bgCanvas.height; y += 1) {
+                const normalized = (y - horizon) / (bgCanvas.height - horizon);
+                const dynamicSpacing = Math.pow(normalized, 2.3) * (bgCanvas.height - horizon);
+                const finalY = horizon + ((dynamicSpacing + gridZ * normalized * 2.5) % (bgCanvas.height - horizon));
+
+                if (finalY > horizon + 2 && finalY < bgCanvas.height) {
+                    const alpha = Math.min(0.22, normalized * 0.35);
+                    bgCtx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+                    bgCtx.beginPath();
+                    bgCtx.moveTo(0, finalY);
+                    bgCtx.lineTo(bgCanvas.width, finalY);
+                    bgCtx.stroke();
+                }
+            }
+
+            requestAnimationFrame(renderBg);
+        }
+
+        renderBg();
+    }
+
+    /* ═══════════════════════════════════════════
+       INTERACTIVE CYBER-GRID INTERCEPTOR MINI-GAME
+       ═══════════════════════════════════════════ */
+    function initCyberGame() {
+        const gameCanvas = document.getElementById('game-canvas');
+        if (!gameCanvas) return;
+        const gCtx = gameCanvas.getContext('2d');
+
+        const scoreEl = document.getElementById('game-score');
+        const comboEl = document.getElementById('game-combo');
+        const shieldFill = document.getElementById('game-shield-fill');
+        const overlay = document.getElementById('game-overlay');
+        const startBtn = document.getElementById('game-start-btn');
+        const overlayTitle = document.getElementById('overlay-title');
+        const overlaySubtitle = document.getElementById('overlay-subtitle');
+        const scoreBox = document.getElementById('overlay-score-box');
+        const finalScoreEl = document.getElementById('overlay-final-score');
+        const finalDodgedEl = document.getElementById('overlay-dodged');
+        const resetBtn = document.getElementById('game-fullscreen-toggle');
+
+        function resizeGame() {
+            const rect = gameCanvas.getBoundingClientRect();
+            gameCanvas.width = rect.width;
+            gameCanvas.height = rect.height;
+        }
+        window.addEventListener('resize', resizeGame);
+        resizeGame();
+
+        let isRunning = false;
+        let score = 0;
+        let dodged = 0;
+        let shield = 100;
+        let combo = 1.0;
+        let speed = 6;
+        let meteors = [];
+        let particles = [];
+        let gridZ = 0;
+        let lastSpawn = 0;
+
+        const jet = {
+            x: gameCanvas.width / 2,
+            y: gameCanvas.height * 0.8,
+            targetX: gameCanvas.width / 2,
+            roll: 0,
+            invulnerable: 0
+        };
+
+        // Controls
+        const keys = {};
+        window.addEventListener('keydown', e => { keys[e.key] = true; });
+        window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+        gameCanvas.addEventListener('mousemove', e => {
+            if (!isRunning) return;
+            const rect = gameCanvas.getBoundingClientRect();
+            jet.targetX = e.clientX - rect.left;
+        });
+
+        gameCanvas.addEventListener('touchmove', e => {
+            if (!isRunning || !e.touches[0]) return;
+            const rect = gameCanvas.getBoundingClientRect();
+            jet.targetX = e.touches[0].clientX - rect.left;
+        }, { passive: true });
+
+        function startMission() {
+            resizeGame();
+            isRunning = true;
+            score = 0;
+            dodged = 0;
+            shield = 100;
+            combo = 1.0;
+            speed = 6;
+            meteors = [];
+            particles = [];
+            jet.x = gameCanvas.width / 2;
+            jet.targetX = gameCanvas.width / 2;
+
+            overlay.classList.add('hidden');
+            scoreBox.style.display = 'none';
+            updateGameHUD();
+        }
+
+        function gameOver() {
+            isRunning = false;
+            createExplosion(jet.x, jet.y, 40, '#06b6d4');
+            createExplosion(jet.x, jet.y, 25, '#ffffff');
+
+            overlayTitle.textContent = 'MISSION TELEMETRY';
+            overlaySubtitle.textContent = 'Shield depleted! Telemetry anomaly encountered.';
+            finalScoreEl.textContent = Math.floor(score).toLocaleString();
+            finalDodgedEl.textContent = dodged;
+            scoreBox.style.display = 'block';
+            startBtn.innerHTML = '<i class="fa-solid fa-rotate-right"></i> RE-ENGAGE JET';
+            overlay.classList.remove('hidden');
+        }
+
+        function createExplosion(x, y, count, color) {
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const spd = Math.random() * 6 + 2;
+                particles.push({
+                    x: x, y: y,
+                    vx: Math.cos(angle) * spd,
+                    vy: Math.sin(angle) * spd,
+                    radius: Math.random() * 2.5 + 1,
+                    color: color,
+                    alpha: 1,
+                    decay: Math.random() * 0.03 + 0.02
+                });
+            }
+        }
+
+        function spawnMeteor() {
+            const horizonY = gameCanvas.height * 0.42;
+            const startX = gameCanvas.width * 0.5 + (Math.random() - 0.5) * (gameCanvas.width * 0.5);
+            const targetX = Math.random() * gameCanvas.width;
+            const angle = Math.atan2(gameCanvas.height - horizonY, targetX - startX);
+            const meteorSpeed = speed * (Math.random() * 0.4 + 0.8);
+
+            meteors.push({
+                x: startX,
+                y: horizonY,
+                vx: Math.cos(angle) * meteorSpeed,
+                vy: Math.sin(angle) * meteorSpeed,
+                scale: 0.15,
+                maxRadius: Math.random() * 18 + 16,
+                rotation: 0,
+                rotSpeed: (Math.random() - 0.5) * 0.06,
+                isAnomaly: Math.random() > 0.75
+            });
+        }
+
+        function updateGameHUD() {
+            scoreEl.textContent = Math.floor(score).toString().padStart(5, '0');
+            comboEl.textContent = combo.toFixed(1) + 'x';
+            shieldFill.style.width = Math.max(0, shield) + '%';
+
+            if (shield <= 25) shieldFill.style.background = '#ef4444';
+            else if (shield <= 50) shieldFill.style.background = '#eab308';
+            else shieldFill.style.background = 'linear-gradient(90deg, #0284c7, #06b6d4)';
+        }
+
+        startBtn.addEventListener('click', startMission);
+        if (resetBtn) resetBtn.addEventListener('click', () => { if (isRunning) gameOver(); else startMission(); });
+
+        function gameLoop(timestamp) {
+            gCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
+            const horizon = gameCanvas.height * 0.42;
+
+            // Arena Background
+            const arenaBg = gCtx.createLinearGradient(0, 0, 0, gameCanvas.height);
+            arenaBg.addColorStop(0, '#04070d');
+            arenaBg.addColorStop(0.42, '#081220');
+            arenaBg.addColorStop(1, '#050912');
+            gCtx.fillStyle = arenaBg;
+            gCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+
+            // 3D Grid in Game Arena
+            gridZ = (gridZ + speed * 0.75) % 40;
+            const lines = 22;
+            gCtx.strokeStyle = 'rgba(6, 182, 212, 0.25)';
+            gCtx.lineWidth = 1;
+
+            for (let i = 0; i <= lines; i++) {
+                const bottomX = (gameCanvas.width / lines) * i;
+                const topX = gameCanvas.width * 0.5 + (bottomX - gameCanvas.width * 0.5) * 0.12;
+                gCtx.beginPath();
+                gCtx.moveTo(topX, horizon);
+                gCtx.lineTo(bottomX, gameCanvas.height);
+                gCtx.stroke();
+            }
+
+            for (let y = horizon; y < gameCanvas.height; y += 1) {
+                const normalized = (y - horizon) / (gameCanvas.height - horizon);
+                const dynamicSpacing = Math.pow(normalized, 2.2) * (gameCanvas.height - horizon);
+                const finalY = horizon + ((dynamicSpacing + gridZ * normalized * 2.5) % (gameCanvas.height - horizon));
+
+                if (finalY > horizon + 2 && finalY < gameCanvas.height) {
+                    const alpha = Math.min(0.35, normalized * 0.5);
+                    gCtx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+                    gCtx.beginPath();
+                    gCtx.moveTo(0, finalY);
+                    gCtx.lineTo(gameCanvas.width, finalY);
+                    gCtx.stroke();
+                }
+            }
+
+            // Logic Update
+            if (isRunning) {
+                score += (speed * 0.1) * combo;
+                combo = Math.min(5.0, 1.0 + dodged * 0.1);
+                speed = 6 + Math.min(7, score / 450);
+
+                if (keys['ArrowLeft'] || keys['a'] || keys['A']) jet.targetX -= 10;
+                if (keys['ArrowRight'] || keys['d'] || keys['D']) jet.targetX += 10;
+
+                const dx = jet.targetX - jet.x;
+                jet.x += dx * 0.14;
+                jet.x = Math.max(25, Math.min(gameCanvas.width - 25, jet.x));
+                jet.roll = Math.max(-0.35, Math.min(0.35, dx * 0.015));
+
+                const spawnInterval = Math.max(380, 950 - speed * 40);
+                if (timestamp - lastSpawn > spawnInterval) {
+                    spawnMeteor();
+                    lastSpawn = timestamp;
+                }
+
+                if (jet.invulnerable > 0) jet.invulnerable--;
+                updateGameHUD();
+            }
+
+            // Meteors
+            for (let i = meteors.length - 1; i >= 0; i--) {
+                const m = meteors[i];
+                m.x += m.vx;
+                m.y += m.vy;
+                m.rotation += m.rotSpeed;
+
+                const prog = (m.y - horizon) / (gameCanvas.height - horizon);
+                m.scale = Math.min(1.3, 0.15 + prog * 1.15);
+                const curRadius = m.maxRadius * m.scale;
+
+                gCtx.save();
+                gCtx.translate(m.x, m.y);
+                gCtx.rotate(m.rotation);
+
+                if (m.isAnomaly) {
+                    gCtx.beginPath();
+                    gCtx.arc(0, 0, curRadius, 0, Math.PI * 2);
+                    gCtx.fillStyle = '#061320';
+                    gCtx.fill();
+                    gCtx.strokeStyle = '#06b6d4';
+                    gCtx.lineWidth = 2 * m.scale;
+                    gCtx.shadowBlur = 10 * m.scale;
+                    gCtx.shadowColor = '#06b6d4';
+                    gCtx.stroke();
+                } else {
+                    gCtx.beginPath();
+                    gCtx.arc(0, 0, curRadius, 0, Math.PI * 2);
+                    gCtx.fillStyle = '#1e1c24';
+                    gCtx.fill();
+                    gCtx.strokeStyle = '#f97316';
+                    gCtx.lineWidth = 1.5 * m.scale;
+                    gCtx.shadowBlur = 6 * m.scale;
+                    gCtx.shadowColor = '#ea580c';
+                    gCtx.stroke();
+                }
+                gCtx.restore();
+
+                // Hit Detection
+                if (isRunning && jet.invulnerable === 0) {
+                    const dist = Math.hypot(jet.x - m.x, jet.y - m.y);
+                    if (dist < curRadius + 16) {
+                        shield -= 34;
+                        jet.invulnerable = 30;
+                        createExplosion(m.x, m.y, 16, m.isAnomaly ? '#06b6d4' : '#f97316');
+                        meteors.splice(i, 1);
+                        if (shield <= 0) {
+                            gameOver();
+                            break;
+                        }
+                        continue;
+                    }
+                }
+
+                if (m.y > gameCanvas.height + 30) {
+                    meteors.splice(i, 1);
+                    if (isRunning) dodged++;
+                }
+            }
+
+            // Particles
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= p.decay;
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+                gCtx.beginPath();
+                gCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                gCtx.fillStyle = p.color;
+                gCtx.globalAlpha = p.alpha;
+                gCtx.fill();
+                gCtx.globalAlpha = 1;
+            }
+
+            // Draw Jet
+            if (isRunning || !overlay.classList.contains('hidden')) {
+                gCtx.save();
+                gCtx.translate(jet.x, jet.y);
+                gCtx.rotate(jet.roll);
+
+                if (jet.invulnerable > 0 && Math.floor(jet.invulnerable / 4) % 2 === 0) {
+                    gCtx.globalAlpha = 0.3;
+                }
+
+                // Thrusters
+                const flame = 12 + Math.random() * 6 + speed;
+                gCtx.beginPath();
+                gCtx.moveTo(-7, 16);
+                gCtx.lineTo(-4, 16 + flame);
+                gCtx.lineTo(-1, 16);
+                gCtx.fillStyle = '#38bdf8';
+                gCtx.fill();
+
+                gCtx.beginPath();
+                gCtx.moveTo(1, 16);
+                gCtx.lineTo(4, 16 + flame);
+                gCtx.lineTo(7, 16);
+                gCtx.fillStyle = '#38bdf8';
+                gCtx.fill();
+
+                // Fuselage
+                gCtx.beginPath();
+                gCtx.moveTo(0, -24);
+                gCtx.lineTo(6, -10);
+                gCtx.lineTo(20, 10);
+                gCtx.lineTo(10, 14);
+                gCtx.lineTo(6, 18);
+                gCtx.lineTo(-6, 18);
+                gCtx.lineTo(-10, 14);
+                gCtx.lineTo(-20, 10);
+                gCtx.lineTo(-6, -10);
+                gCtx.closePath();
+
+                gCtx.fillStyle = '#0a1626';
+                gCtx.fill();
+                gCtx.strokeStyle = '#06b6d4';
+                gCtx.lineWidth = 1.8;
+                gCtx.shadowBlur = 8;
+                gCtx.shadowColor = '#06b6d4';
+                gCtx.stroke();
+                gCtx.shadowBlur = 0;
+
+                gCtx.restore();
+                gCtx.globalAlpha = 1;
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        requestAnimationFrame(gameLoop);
+    }
+
 
     // Scroll event handler (throttled)
     let ticking = false;

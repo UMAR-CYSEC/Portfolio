@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber-Grid Interceptor | Muhammad Umar SOC Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    body {
+      background-color: #060b13;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, sans-serif;
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+    }
+    #game-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      display: block;
+      cursor: crosshair;
+    }
+    .hud-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px 32px;
+    }
+    .interactive {
+      pointer-events: auto;
+    }
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .btn-back-portfolio {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: rgba(8, 13, 23, 0.85);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      border-radius: 30px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: all 0.25s ease;
+    }
+    .btn-back-portfolio:hover {
+      background: #06b6d4;
+      color: #060b13;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+      transform: translateY(-2px);
+    }
+    .telemetry-card {
+      background: rgba(8, 13, 23, 0.85);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 10px 24px;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    }
+    .stat-box {
+      text-align: center;
+    }
+    .stat-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #94a3b8;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      font-family: monospace;
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+    }
+    .stat-val-cyan {
+      color: #06b6d4;
+    }
+    .shield-track {
+      width: 120px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+    }
+    .shield-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #0284c7, #06b6d4);
+      box-shadow: 0 0 10px #06b6d4;
+      transition: width 0.2s ease;
+    }
+    .bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      font-size: 0.75rem;
+      font-family: monospace;
+      color: #64748b;
+    }
+    .controls-hint {
+      background: rgba(8, 13, 23, 0.7);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #cbd5e1;
+    }
+    .controls-hint strong {
+      color: #06b6d4;
+    }
+    /* Modal / Overlay */
+    .game-modal {
+      position: absolute;
+      inset: 0;
+      background: rgba(4, 7, 13, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+    }
+    .game-modal.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .modal-box {
+      background: #09121f;
+      border: 1px solid rgba(6, 182, 212, 0.5);
+      box-shadow: 0 0 50px rgba(6, 182, 212, 0.3), inset 0 0 30px rgba(6, 182, 212, 0.1);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+    }
+    .modal-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(6, 182, 212, 0.12);
+      border: 1px solid #06b6d4;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+    }
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+    .modal-title span {
+      color: #06b6d4;
+      text-shadow: 0 0 15px rgba(6, 182, 212, 0.8);
+    }
+    .modal-subtitle {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .instructions-card {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+    .instructions-card li {
+      list-style: none;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .instructions-card i {
+      color: #06b6d4;
+      font-size: 0.75rem;
+    }
+    .btn-launch-game {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #0284c7, #06b6d4);
+      border: none;
+      color: #060b13;
+      font-size: 1rem;
+      font-weight: 800;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+      transition: all 0.25s ease;
+      letter-spacing: 0.05em;
+    }
+    .btn-launch-game:hover {
+      background: linear-gradient(135deg, #0369a1, #38bdf8);
+      transform: scale(1.02);
+      box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+    }
+    .score-summary {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 20px;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .score-summary div {
+      display: flex;
+      justify-content: space-between;
+      margin: 4px 0;
+      color: #94a3b8;
+    }
+    .score-summary strong {
+      color: #06b6d4;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fullscreen 3D Cyber Canvas -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- HUD Interface -->
+  <div class="hud-layer">
+    
+    <!-- Top Bar -->
+    <div class="top-nav">
+      <a href="index.html" class="btn-back-portfolio interactive">
+        <i class="fa-solid fa-arrow-left"></i> Back to Portfolio
+      </a>
+
+      <div class="telemetry-card">
+        <div class="stat-box">
+          <span class="stat-label">Shield</span>
+          <div class="shield-track">
+            <div id="shield-bar" class="shield-fill"></div>
+          </div>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Score</span>
+          <span id="score-text" class="stat-val">00000</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Combo</span>
+          <span id="combo-text" class="stat-val stat-val-cyan">1.0x</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Controls & Altitude -->
+    <div class="bottom-bar">
+      <div class="controls-hint">
+        🎮 <strong>Full 4-Way Controls:</strong> W/A/S/D or Arrow Keys | Mouse/Touch to steer anywhere
+      </div>
+      <div id="altitude-text">
+        ALTITUDE: 4,500m
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Start / Game Over Modal -->
+  <div id="game-modal" class="game-modal">
+    <div class="modal-box interactive">
+      <div class="modal-icon">🚀</div>
+      <h1 class="modal-title">CYBER <span>INTERCEPTOR</span></h1>
+      <p class="modal-subtitle">Dodging cyber threats on the 3D grid in full 4-directional flight.</p>
+
+      <div id="game-over-panel" style="display: none;" class="score-summary">
+        <div><span>SURVIVAL SCORE:</span><strong id="final-score">0</strong></div>
+        <div><span>ANOMALIES DODGED:</span><strong id="final-dodged">0</strong></div>
+        <div><span>MAX COMBO:</span><strong id="final-combo">1.0x</strong></div>
+      </div>
+
+      <div class="instructions-card">
+        <li><i class="fa-solid fa-arrows-up-down-left-right"></i> <strong>Steer Jet:</strong> W/A/S/D, Arrow Keys, or Mouse</li>
+        <li><i class="fa-solid fa-up-long"></i> <strong>Fly Forward:</strong> Press W or Up Arrow</li>
+        <li><i class="fa-solid fa-down-long"></i> <strong>Retreat / Brake:</strong> Press S or Down Arrow</li>
+        <li><i class="fa-solid fa-shield-halved"></i> <strong>Shield:</strong> Take up to 3 direct hits before critical failure</li>
+      </div>
+
+      <button id="start-btn" class="btn-launch-game">
+        ⚡ ENGAGE FLIGHT MISSION
+      </button>
+
+      <a href="index.html" style="display: inline-block; margin-top: 16px; font-size: 0.8rem; color: #64748b; text-decoration: none;">
+        ← Or return to Muhammad Umar's Portfolio
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const scoreText = document.getElementById('score-text');
+    const comboText = document.getElementById('combo-text');
+    const shieldBar = document.getElementById('shield-bar');
+    const altitudeText = document.getElementById('altitude-text');
+    const modal = document.getElementById('game-modal');
+    const gameOverPanel = document.getElementById('game-over-panel');
+    const finalScore = document.getElementById('final-score');
+    const finalDodged = document.getElementById('final-dodged');
+    const finalCombo = document.getElementById('final-combo');
+    const startBtn = document.getElementById('start-btn');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let isPlaying = false;
+    let score = 0;
+    let dodged = 0;
+    let shield = 100;
+    let combo = 1.0;
+    let speed = 7;
+    let gridOffset = 0;
+    let altitude = 4500;
+    let lastSpawn = 0;
+
+    // Jet Object with full 4-way position (X and Y)
+    const jet = {
+      x: canvas.width / 2,
+      y: canvas.height * 0.75,
+      targetX: canvas.width / 2,
+      targetY: canvas.height * 0.75,
+      vx: 0,
+      vy: 0,
+      roll: 0,
+      pitch: 0,
+      invulnerable: 0
+    };
+
+    let meteors = [];
+    let particles = [];
+    const stars = [];
+    for (let i = 0; i < 90; i++) {
+      stars.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * (window.innerHeight * 0.55),
+        size: Math.random() * 1.5 + 0.5,
+        alpha: Math.random() * 0.7 + 0.3,
+        speed: Math.random() * 0.3 + 0.1
+      });
+    }
+
+    const keys = {};
+    window.addEventListener('keydown', e => { keys[e.key] = true; });
+    window.addEventListener('keyup', e => { keys[e.key] = false; });
+
+    // Mouse / Touch 4-way steering
+    window.addEventListener('mousemove', e => {
+      if (!isPlaying) return;
+      jet.targetX = e.clientX;
+      jet.targetY = Math.max(canvas.height * 0.35, Math.min(canvas.height * 0.9, e.clientY));
+    });
+
+    window.addEventListener('touchmove', e => {
+      if (!isPlaying || !e.touches[0]) return;
+      jet.targetX = e.touches[0].clientX;
+      jet.targetY = Math.max(canvas.height * 0.35, Math.min(canvas.height * 0.9, e.touches[0].clientY));
+    }, { passive: true });
+
+    function startGame() {
+      isPlaying = true;
+      score = 0;
+      dodged = 0;
+      shield = 100;
+      combo = 1.0;
+      speed = 7;
+      meteors = [];
+      particles = [];
+      jet.x = canvas.width / 2;
+      jet.y = canvas.height * 0.75;
+      jet.targetX = canvas.width / 2;
+      jet.targetY = canvas.height * 0.75;
+
+      modal.classList.add('hidden');
+      gameOverPanel.style.display = 'none';
+      updateHUD();
+    }
+
+    function gameOver() {
+      isPlaying = false;
+      createExplosion(jet.x, jet.y, 45, '#06b6d4');
+      createExplosion(jet.x, jet.y, 30, '#ffffff');
+
+      finalScore.textContent = Math.floor(score).toLocaleString();
+      finalDodged.textContent = dodged;
+      finalCombo.textContent = combo.toFixed(1) + 'x';
+      gameOverPanel.style.display = 'block';
+      startBtn.innerHTML = '🔄 RE-ENGAGE FLIGHT MISSION';
+      modal.classList.remove('hidden');
+    }
+
+    function createExplosion(x, y, count, color) {
+      for (let i = 0; i < count; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const spd = Math.random() * 7 + 2;
+        particles.push({
+          x: x, y: y,
+          vx: Math.cos(angle) * spd,
+          vy: Math.sin(angle) * spd,
+          radius: Math.random() * 3 + 1,
+          color: color,
+          alpha: 1,
+          decay: Math.random() * 0.03 + 0.015
+        });
+      }
+    }
+
+    function spawnMeteor() {
+      const horizonY = canvas.height * 0.42;
+      const startX = canvas.width * 0.5 + (Math.random() - 0.5) * (canvas.width * 0.45);
+      const targetX = Math.random() * canvas.width;
+      const angle = Math.atan2(canvas.height - horizonY, targetX - startX);
+      const meteorSpeed = speed * (Math.random() * 0.4 + 0.8);
+
+      meteors.push({
+        x: startX,
+        y: horizonY,
+        vx: Math.cos(angle) * meteorSpeed,
+        vy: Math.sin(angle) * meteorSpeed,
+        scale: 0.15,
+        maxRadius: Math.random() * 22 + 16,
+        rotation: 0,
+        rotSpeed: (Math.random() - 0.5) * 0.06,
+        isAnomaly: Math.random() > 0.75
+      });
+    }
+
+    function updateHUD() {
+      scoreText.textContent = Math.floor(score).toString().padStart(5, '0');
+      comboText.textContent = combo.toFixed(1) + 'x';
+      shieldBar.style.width = Math.max(0, shield) + '%';
+
+      if (shield <= 25) shieldBar.style.background = '#ef4444';
+      else if (shield <= 50) shieldBar.style.background = '#eab308';
+      else shieldBar.style.background = 'linear-gradient(90deg, #0284c7, #06b6d4)';
+
+      altitude += Math.round(speed * 0.6);
+      altitudeText.textContent = `ALTITUDE: ${altitude.toLocaleString()}m`;
+    }
+
+    startBtn.addEventListener('click', startGame);
+
+    function loop(timestamp) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const horizon = canvas.height * 0.42;
+
+      // Deep Space Canvas Gradient
+      const skyGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      skyGrad.addColorStop(0, '#04070d');
+      skyGrad.addColorStop(0.42, '#091322');
+      skyGrad.addColorStop(1, '#050912');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Stars
+      stars.forEach(s => {
+        s.y += s.speed;
+        if (s.y > horizon) s.y = 0;
+        ctx.fillStyle = `rgba(56, 189, 248, ${s.alpha * 0.6})`;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+      });
+
+      // Horizon Glow
+      const glow = ctx.createLinearGradient(0, horizon - 25, 0, horizon + 50);
+      glow.addColorStop(0, 'rgba(6, 182, 212, 0)');
+      glow.addColorStop(0.5, 'rgba(6, 182, 212, 0.35)');
+      glow.addColorStop(1, 'rgba(6, 182, 212, 0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(0, horizon - 25, canvas.width, 75);
+
+      // Horizon Line
+      ctx.strokeStyle = 'rgba(6, 182, 212, 0.6)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(0, horizon);
+      ctx.lineTo(canvas.width, horizon);
+      ctx.stroke();
+
+      // 3D Perspective Grid
+      gridOffset = (gridOffset + speed * 0.8) % 40;
+      const lines = 28;
+      ctx.strokeStyle = 'rgba(6, 182, 212, 0.22)';
+      ctx.lineWidth = 1;
+
+      for (let i = 0; i <= lines; i++) {
+        const bottomX = (canvas.width / lines) * i;
+        const topX = canvas.width * 0.5 + (bottomX - canvas.width * 0.5) * 0.12;
+        ctx.beginPath();
+        ctx.moveTo(topX, horizon);
+        ctx.lineTo(bottomX, canvas.height);
+        ctx.stroke();
+      }
+
+      for (let y = horizon; y < canvas.height; y += 1) {
+        const normalized = (y - horizon) / (canvas.height - horizon);
+        const dynamicSpacing = Math.pow(normalized, 2.2) * (canvas.height - horizon);
+        const finalY = horizon + ((dynamicSpacing + gridOffset * normalized * 2.5) % (canvas.height - horizon));
+
+        if (finalY > horizon + 2 && finalY < canvas.height) {
+          const alpha = Math.min(0.35, normalized * 0.55);
+          ctx.strokeStyle = `rgba(6, 182, 212, ${alpha})`;
+          ctx.beginPath();
+          ctx.moveTo(0, finalY);
+          ctx.lineTo(canvas.width, finalY);
+          ctx.stroke();
+        }
+      }
+
+      // Logic Update
+      if (isPlaying) {
+        score += (speed * 0.1) * combo;
+        combo = Math.min(5.0, 1.0 + dodged * 0.1);
+        speed = 7 + Math.min(8, score / 400);
+
+        // 4-WAY KEYBOARD CONTROLS (Left, Right, Forward, Backward)
+        if (keys['ArrowLeft'] || keys['a'] || keys['A']) jet.targetX -= 12;
+        if (keys['ArrowRight'] || keys['d'] || keys['D']) jet.targetX += 12;
+        if (keys['ArrowUp'] || keys['w'] || keys['W']) jet.targetY -= 10;
+        if (keys['ArrowDown'] || keys['s'] || keys['S']) jet.targetY += 10;
+
+        // Smooth 4-way interpolation
+        const dx = jet.targetX - jet.x;
+        const dy = jet.targetY - jet.y;
+        jet.x += dx * 0.14;
+        jet.y += dy * 0.14;
+
+        // Bound jet safely inside viewport
+        jet.x = Math.max(30, Math.min(canvas.width - 30, jet.x));
+        jet.y = Math.max(horizon + 30, Math.min(canvas.height - 40, jet.y));
+
+        // Jet Roll & Pitch
+        jet.roll = Math.max(-0.4, Math.min(0.4, dx * 0.015));
+        jet.pitch = Math.max(-0.3, Math.min(0.3, dy * 0.015));
+
+        const spawnInterval = Math.max(350, 950 - speed * 40);
+        if (timestamp - lastSpawn > spawnInterval) {
+          spawnMeteor();
+          lastSpawn = timestamp;
+        }
+
+        if (jet.invulnerable > 0) jet.invulnerable--;
+        updateHUD();
+      }
+
+      // Meteors
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        m.x += m.vx;
+        m.y += m.vy;
+        m.rotation += m.rotSpeed;
+
+        const prog = (m.y - horizon) / (canvas.height - horizon);
+        m.scale = Math.min(1.4, 0.15 + prog * 1.25);
+        const curRadius = m.maxRadius * m.scale;
+
+        ctx.save();
+        ctx.translate(m.x, m.y);
+        ctx.rotate(m.rotation);
+
+        if (m.isAnomaly) {
+          ctx.beginPath();
+          ctx.arc(0, 0, curRadius, 0, Math.PI * 2);
+          ctx.fillStyle = '#061320';
+          ctx.fill();
+          ctx.strokeStyle = '#06b6d4';
+          ctx.lineWidth = 2 * m.scale;
+          ctx.shadowBlur = 12 * m.scale;
+          ctx.shadowColor = '#06b6d4';
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(0, 0, curRadius * 0.35, 0, Math.PI * 2);
+          ctx.fillStyle = '#38bdf8';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, curRadius, 0, Math.PI * 2);
+          ctx.fillStyle = '#1e1c24';
+          ctx.fill();
+          ctx.strokeStyle = '#f97316';
+          ctx.lineWidth = 1.5 * m.scale;
+          ctx.shadowBlur = 8 * m.scale;
+          ctx.shadowColor = '#ea580c';
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        // Hit Detection against Jet (4-way X and Y)
+        if (isPlaying && jet.invulnerable === 0) {
+          const dist = Math.hypot(jet.x - m.x, jet.y - m.y);
+          if (dist < curRadius + 18) {
+            shield -= 34;
+            jet.invulnerable = 35;
+            createExplosion(m.x, m.y, 20, m.isAnomaly ? '#06b6d4' : '#f97316');
+            meteors.splice(i, 1);
+            if (shield <= 0) {
+              gameOver();
+              break;
+            }
+            continue;
+          }
+        }
+
+        if (m.y > canvas.height + 40) {
+          meteors.splice(i, 1);
+          if (isPlaying) dodged++;
+        }
+      }
+
+      // Particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.alpha -= p.decay;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+
+      // Draw Jet
+      if (isPlaying || !modal.classList.contains('hidden')) {
+        ctx.save();
+        ctx.translate(jet.x, jet.y);
+        ctx.rotate(jet.roll);
+
+        if (jet.invulnerable > 0 && Math.floor(jet.invulnerable / 4) % 2 === 0) {
+          ctx.globalAlpha = 0.3;
+        }
+
+        // Shadow on grid
+        ctx.beginPath();
+        ctx.ellipse(0, 32, 28, 8, 0, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.25)';
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = '#06b6d4';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Twin Thrusters
+        const flame = 16 + Math.random() * 8 + speed * 1.2;
+        ctx.beginPath();
+        ctx.moveTo(-10, 20);
+        ctx.lineTo(-6, 20 + flame);
+        ctx.lineTo(-2, 20);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(2, 20);
+        ctx.lineTo(6, 20 + flame);
+        ctx.lineTo(10, 20);
+        ctx.fillStyle = '#38bdf8';
+        ctx.fill();
+
+        // Fuselage
+        ctx.beginPath();
+        ctx.moveTo(0, -28);
+        ctx.lineTo(8, -12);
+        ctx.lineTo(24, 12);
+        ctx.lineTo(12, 16);
+        ctx.lineTo(8, 22);
+        ctx.lineTo(-8, 22);
+        ctx.lineTo(-12, 16);
+        ctx.lineTo(-24, 12);
+        ctx.lineTo(-8, -12);
+        ctx.closePath();
+
+        const jetGrad = ctx.createLinearGradient(0, -28, 0, 24);
+        jetGrad.addColorStop(0, '#e0f2fe');
+        jetGrad.addColorStop(0.3, '#0c1a2d');
+        jetGrad.addColorStop(1, '#060d17');
+        ctx.fillStyle = jetGrad;
+        ctx.fill();
+
+        ctx.strokeStyle = '#06b6d4';
+        ctx.lineWidth = 1.8;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#06b6d4';
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+
+        // Cockpit
+        ctx.beginPath();
+        ctx.ellipse(0, -6, 4, 12, 0, 0, Math.PI * 2);
+        ctx.fillStyle = '#06b6d4';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#38bdf8';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        ctx.restore();
+        ctx.globalAlpha = 1;
+      }
+
+      requestAnimationFrame(loop);
+    }
+
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
